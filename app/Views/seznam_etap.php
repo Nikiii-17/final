@@ -1,11 +1,16 @@
 <?= $this->extend('layout/template'); ?>
 <?= $this->section('content'); ?>
 
+<?php
+/** 
+ * @var object $vse
+*/
+ ?>
 <div class="text-center mb-5">
     <h1 class="p-2" style="font-style: italic; font-size: 60px;">
         Seznam etap
     </h1>
-    <p>Přehled etap, tras, vítězů</p>
+    <h2>Přehled etap, tras, vítězů</h2>
 </div>
 
 <div class="table-responsive table-striped mt-5">
@@ -42,6 +47,10 @@
         'Délka etapy (km)', 
         'Vítěz etapy'
     );
+
+    foreach($vse as $row){
+        $table->addRow($row->number, $row->departure, $row->arrival, $row->distance, $row->first_name. " ". $row->last_name);
+    };
 
     
     echo $table->generate();
