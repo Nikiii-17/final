@@ -45,16 +45,28 @@
         'Start', 
         'Cíl', 
         'Délka etapy (km)', 
-        'Vítěz etapy'
+        'Vítěz etapy',
+        'Proklik'
     );
 
     foreach($vse as $row){
-        $table->addRow($row->number, $row->departure, $row->arrival, $row->distance, $row->first_name. " ". $row->last_name);
-    };
+        
+        $detailOdkaz = '<a href="' . base_url('dva/') . $row->id . '" class="btn btn-primary btn-sm">Proklik</a>';
 
+      
+        $table->addRow(
+            $row->number, 
+            $row->departure, 
+            $row->arrival, 
+            $row->distance, 
+            $row->first_name . " " . $row->last_name,
+            $detailOdkaz
+        );
+    };
     
     echo $table->generate();
     ?>
 </div>
+
 
 <?= $this->endSection(); ?>
