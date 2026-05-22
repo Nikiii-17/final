@@ -21,17 +21,21 @@ class DvaProklik extends BaseController
     public function index($id)
 {
    
-    $data[
-        'detail'] = $this->stage
-        ->select('rider.last_name, rider.first_name, result.*, stage.*')
-        ->join('race_year', 'stage.id_race_year = race_year.id')
-        ->join('race','race.id = race_year.id_race')
-        ->join('result', 'result.id_stage = stage.id')
-        ->join('rider', 'result.id_rider = rider.id')
-        ->where('stage.id', $id)       
-        ->where('result.rank', 1)       
-        ->where('result.type_result', 1)
-        ->first();        
+    $data['detail'] = $this->stage
+    ->select('rider.last_name, rider.first_name, rider.country, result.*, stage.*')
+    ->select('stage.vertical_meters AS vertikal') 
+    ->select('parcour_type.name AS parcour_name')
+    ->select('result.time AS cas') //cas - dodelat
+    ->join('race_year', 'stage.id_race_year = race_year.id')
+    ->join('race','race.id = race_year.id_race')
+    ->join('result', 'result.id_stage = stage.id')
+    ->join('rider', 'result.id_rider = rider.id')
+    ->join('parcour_type', 'stage.parcour_type = parcour_type.id')
+    ->where('stage.id', $id)       
+    ->where('result.rank', 1)       
+    ->where('result.type_result', 1)
+
+    ->first();
         //var_dump($data['detail']);              
 
     return view('info', $data);

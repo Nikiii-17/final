@@ -5,6 +5,15 @@
 /** 
  * @var object $detail
  */
+
+ /**
+  * <div class="d-flex justify-content-center w-100">
+  *<img src="<?= base_url('img//' . $detail->flag_image); ?>" style="width: 100%; max-height: 400px; object-fit: contain;" alt="">
+                *</div>
+
+
+                *<span class="fi fi-<?= $detail->country; ?>"></span> (??? idk jak)
+ */
 ?>
 
 <div class="row justify-content-center mt-5">
@@ -33,6 +42,19 @@
                     <div class="mb-2">
                         <strong>Délka etapy:</strong> <?= $detail->distance; ?> km
                     </div>
+
+                    <div class="mb-2">
+                        <strong>Typ etapy:</strong> <?= $detail->parcour_name; ?> 
+                    </div>
+
+                    <div class="mb-2">
+                        <strong>Převýšení:</strong> <?= $detail->vertikal; ?> 
+                    </div>
+
+                    <div class="mb-2">
+                        <strong>Celkové pořadí:</strong> <?= $detail->rank; ?> 
+                    </div>
+                    
 
                     <hr>
 
