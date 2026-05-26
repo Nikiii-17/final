@@ -1,18 +1,11 @@
 <?= $this->extend('layout/template'); ?>
 <?= $this->section('content'); ?>
 
+
 <?php
 /** 
  * @var object $detail
- */
-
- /**
-  * <div class="d-flex justify-content-center w-100">
-  *<img src="<?= base_url('img//' . $detail->flag_image); ?>" style="width: 100%; max-height: 400px; object-fit: contain;" alt="">
-                *</div>
-
-
-                *<span class="fi fi-<?= $detail->country; ?>"></span> (??? idk jak)
+ * @var object $dvojka
  */
 ?>
 
@@ -27,9 +20,10 @@
                 </div>
                 <hr>
                 <div class="card-body">
-                    <div class="card-title mb-3 text-center">
-                        <h3>Vítěz: <?= $detail->first_name . ' ' . $detail->last_name; ?></h3>
-                    </div>
+                    <h3>
+                      <span class="fi fi-<?= $detail->country; ?> me-2"></span> 
+                       Vítěz: <?= $detail->first_name . ' ' . $detail->last_name; ?>
+                    </h3>
                     
                     <div class="mb-2">
                         <strong>Etapa číslo:</strong> <?= $detail->number; ?>
@@ -52,7 +46,11 @@
                     </div>
 
                     <div class="mb-2">
-                        <strong>Celkové pořadí:</strong> <?= $detail->rank; ?> 
+                        <strong>Celkové pořadí:</strong> <?= $dvojka->celk; ?> 
+                    </div>
+
+                    <div class="mb-2">
+                        <strong>Čas závodníka:</strong> <?= $detail->cas; ?> 
                     </div>
                     
 

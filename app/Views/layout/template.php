@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <?= $this->include('layout/css'); ?>
+    <?= $this->include('layout/flag'); ?>
     <title>La Tropicale Amissa Bongo / 2023</title>
 </head>
 <body>
