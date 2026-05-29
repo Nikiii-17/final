@@ -6,14 +6,16 @@
  * @var object $vse
 */
  ?>
-<div class="text-center mb-5">
-    <h1 class="p-2" style="font-style: italic; font-size: 60px;">
+<div class="text-center my-5 pb-4 border-bottom">
+    <h1 class="display-4 fw-bold text-dark mb-2">
         Seznam etap
     </h1>
-    <h2>Přehled etap, tras, vítězů</h2>
+    <h2 class="h5 text-muted fw-normal text-uppercase tracking-wider">
+        Přehled etap, tras a vítězů
+    </h2>
 </div>
 
-<div class="table-responsive table-striped mt-5">
+<div class="table-responsive card shadow-sm p-3 border-0 mt-4">
     <?php
     $table = new \CodeIgniter\View\Table();
 
@@ -51,11 +53,10 @@
 
     foreach($vse as $row){
         
-        $detailOdkaz = '<a href="' . base_url('dva/') . $row->id . '" class="btn btn-primary btn-sm">Proklik</a>';
-
+        $detailOdkaz = '<a href="' . base_url('dva/') . $row->id . '" class="btn btn-outline-primary btn-sm px-3 shadow-sm fw-semibold">Proklik ;D</a>';
       
         $table->addRow(
-            $row->number, 
+            '<span class="fw-bold text-secondary">' . $row->number . '.</span>', 
             $row->departure, 
             $row->arrival, 
             $row->distance, 
@@ -70,3 +71,7 @@
 
 
 <?= $this->endSection(); ?>
+
+
+
+

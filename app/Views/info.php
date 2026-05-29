@@ -46,11 +46,15 @@
                     </div>
 
                     <div class="mb-2">
-                        <strong>Celkové pořadí:</strong> <?= $dvojka->celk; ?> 
+                        <strong>Celkové pořadí:</strong> <?= $dvojka->celk; ?>
                     </div>
 
                     <div class="mb-2">
                         <strong>Čas závodníka:</strong> <?= $detail->cas; ?> 
+                    </div>
+
+                    <div class="mb-2">
+                        <strong>Ztráta na prvního:</strong> <?= $detail->cas; ?> 
                     </div>
                     
 

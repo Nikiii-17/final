@@ -35,18 +35,20 @@ class DvaProklik extends BaseController
         ->first();     
     
     
-    $data['dvojka'] = $this->stage
+        $data['dvojka'] = $this->stage
+        ->select('result.rank AS celk')
         ->join('result', 'result.id_stage = stage.id')
         ->join('rider', 'result.id_rider = rider.id')
-        ->where('result.id_rider', $data['detail']->id_rider) 
-        ->select('result.rank AS celk') 
+        ->where('stage.id', $id) 
+        ->where('result.id_rider', $data['detail']->id_rider)
+        ->where('result.type_result', 4) 
         ->first();
 
     return view('info', $data);
     //var_dump($data['detail']);  
 }
 }
-        //var_dump($data['detail']);              
+                 
 
    
     
