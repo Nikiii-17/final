@@ -33,18 +33,15 @@ class DvaProklik extends BaseController
             ->where('stage.id', $id)       
             ->where('result.rank', 1)  
             ->first();     
-        
-        if (!$data['detail']) {
-            return view('info', ['detail' => null, 'ztrata_sekundy' => 0, 'dvojka' => null]);
-        }
 
-        $data['dvojka'] = $this->stage
-            ->select('result.rank AS celk, result.time AS celk_cas')
+        $celkove_poradi = $this->stage
+            ->select('result.rank AS celk, result.time AS celk_cas, rider.first_name, rider.last_name, rider.country')
             ->join('result', 'result.id_stage = stage.id')
+            ->join('rider', 'result.id_rider = rider.id')
             ->where('stage.id', $id) 
-            ->where('result.id_rider', $data['detail']->id_rider)
             ->where('result.type_result', 4) 
-            ->first();
+            ->orderBy('result.rank', 'ASC')
+            ->findAll();
 
         $winner = $this->stage
             ->select('result.time AS vitez_celk_cas')
@@ -54,18 +51,20 @@ class DvaProklik extends BaseController
             ->where('result.type_result', 4)
             ->first();
         
-        if ($data['dvojka'] && $winner) {
-            if ($data['dvojka']->celk == 1) {
-                $data['ztrata_sekundy'] = 'Vede'; 
-            } else {
-                $cas_zavodnika = strtotime($data['dvojka']->celk_cas);
-                $cas_viteze = strtotime($winner->vitez_celk_cas);
-               
-                $data['ztrata_sekundy'] = $cas_zavodnika - $cas_viteze;
+        if (!empty($celkove_poradi) && $winner) {
+            $cas_viteze = strtotime($winner->vitez_celk_cas);
+
+            foreach ($celkove_poradi as $key => $zavodnik) {
+                if ($zavodnik->celk == 1) {
+                    $celkove_poradi[$key]->ztrata = 'Vede'; 
+                } else {
+                    $cas_zavodnika = strtotime($zavodnik->celk_cas);
+                    $celkove_poradi[$key]->ztrata = $cas_zavodnika - $cas_viteze; 
+                }
             }
-        } else {
-            $data['ztrata_sekundy'] = 0;
         }
+
+        $data['celkove_poradi'] = $celkove_poradi;
 
         return view('info', $data);
     }
