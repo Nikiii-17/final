@@ -21,8 +21,8 @@ class Stage extends Model
     protected array $castHandlers = [];
 
     // Dates
-    protected $useTimestamps = false;
-    protected $dateFormat    = 'datetime';
+    protected $useTimestamps = true;
+    protected $dateFormat    = 'int';
     protected $createdField  = 'created_at';
     protected $updatedField  = 'updated_at';
     protected $deletedField  = 'deleted_at';
