@@ -51,21 +51,24 @@ class DvaProklik extends BaseController
             ->where('result.type_result', 4)
             ->first();
         
-        if (!empty($celkove_poradi) && $winner) {
-            $cas_viteze = strtotime($winner->vitez_celk_cas);
-
-            foreach ($celkove_poradi as $key => $zavodnik) {
-                if ($zavodnik->celk == 1) {
-                    $celkove_poradi[$key]->ztrata = 'Vede'; 
-                } else {
-                    $cas_zavodnika = strtotime($zavodnik->celk_cas);
-                    $celkove_poradi[$key]->ztrata = $cas_zavodnika - $cas_viteze; 
+            if ($winner) {
+                $cas_viteze = strtotime($winner->vitez_celk_cas);
+            
+                foreach ($celkove_poradi as $poradi => $zavodnik) {
+            
+                    if ($zavodnik->celk == 1) {
+                        $celkove_poradi[$poradi]->kolik= 'Vede';
+                    }
+                    else {
+                        $cas_zavodnika = strtotime($zavodnik->celk_cas);
+                        $celkove_poradi[$poradi]->kolik = $cas_zavodnika - $cas_viteze;
+                    }
                 }
             }
-        }
-
-        $data['celkove_poradi'] = $celkove_poradi;
-
+            
+            $data['celkove_poradi'] = $celkove_poradi;
+            
+            
         return view('info', $data);
     }
 }

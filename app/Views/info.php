@@ -78,17 +78,17 @@
             <td><?= $zavodnik->first_name . ' ' . $zavodnik->last_name; ?></td>
             <td><?= $zavodnik->celk_cas; ?></td>
             <td class="text-end">
-                <?php if ($zavodnik->ztrata === 'Vede'): ?>
+                <?php if ($zavodnik->kolik === 'Vede'): ?>
                     <span class="badge bg-success">Vede</span>
                 <?php else: ?>
                     <span class="text-danger fw-medium">
                         + <?php 
-                            if ($zavodnik->ztrata < 60) {
-                                echo $zavodnik->ztrata . ' s';
-                            } elseif ($zavodnik->ztrata >= 3600) {
-                                echo ltrim(gmdate("H:i:s", $zavodnik->ztrata), '0:');
+                            if ($zavodnik->kolik < 60) {
+                                echo $zavodnik->kolik . ' s';
+                            } elseif ($zavodnik->kolik >= 3600) {
+                                echo ltrim(gmdate("H:i:s", $zavodnik->kolik), '0:');
                             } else {
-                                echo ltrim(gmdate("i:s", $zavodnik->ztrata), '0');
+                                echo ltrim(gmdate("i:s", $zavodnik->kolik), '0');
                             }
                         ?>
                     </span>
